@@ -7,9 +7,10 @@ import {
   TableCell,
   TableBody,
   TablePagination,
+  TableSortLabel,
+  makeStyles,
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
-import { FC } from "react";
 import {
   CountryDtoType,
   CountryListType,
@@ -43,21 +44,13 @@ const COUTRIES_TABLE_QUERY = gql`
   }
 `;
 
-type Props = {
-  searchTerm: string;
-};
-
-export const CountriesTable: FC<Props> = ({ searchTerm }) => {
+export const CountriesTable = () => {
   const { data, loading, error } = useQuery(COUTRIES_TABLE_QUERY);
   const [order, setOrder] = useState<Order>("asc");
   const [orderBy, setOrderBy] = useState<keyof CountryType>("name");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [countryList, setCountryList] = useState<CountryListType>();
-  const [
-    searchedCountryList,
-    setSearchedCountryList,
-  ] = useState<CountryListType>();
 
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
@@ -92,19 +85,8 @@ export const CountriesTable: FC<Props> = ({ searchTerm }) => {
           convertCountryDtoToCountryType(data)
         )
       );
-      setSearchedCountryList(countryList);
     }
   }, [data]);
-
-  useEffect(() => {
-    if (countryList) {
-      setSearchedCountryList(
-        countryList.filter((country) => {
-          return country.name.toLowerCase().includes(searchTerm.toLowerCase());
-        })
-      );
-    }
-  }, [searchTerm]);
 
   if (loading || error) {
     return <p>{error ? error.message : "Loading..."}</p>;
@@ -129,8 +111,8 @@ export const CountriesTable: FC<Props> = ({ searchTerm }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {searchedCountryList &&
-              stableSort(searchedCountryList, getComparator(order, orderBy))
+            {countryList &&
+              stableSort(countryList, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => {
                   return <CountryTableBody key={row._id} country={row} />;
