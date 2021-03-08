@@ -6,20 +6,18 @@ import {
 } from "../../types/types";
 
 export const headCells: HeadCellListType = [
-  { id: "name", numeric: false, disablePadding: true, label: "Country" },
-  { id: "region", numeric: true, disablePadding: false, label: "Region" },
-  { id: "subregion", numeric: true, disablePadding: false, label: "Subregion" },
-  { id: "capital", numeric: true, disablePadding: false, label: "Capital" },
+  { id: "name", numeric: false, label: "Country" },
+  { id: "region", numeric: true, label: "Region" },
+  { id: "subregion", numeric: true, label: "Subregion" },
+  { id: "capital", numeric: true, label: "Capital" },
   {
     id: "area",
     numeric: true,
-    disablePadding: false,
-    label: "km²",
+    label: "Area (km²)",
   },
   {
     id: "population",
     numeric: true,
-    disablePadding: false,
     label: "Population",
   },
 ];
@@ -68,4 +66,12 @@ export const stableSort = <T>(
     return a[1] - b[1];
   });
   return stabilizedThis.map((el) => el[0]);
+};
+
+export const arrayToString = <T>(a: T[], name: keyof T) => {
+  const newArray = a.map((val: T) => {
+    return val[name];
+  });
+
+  return newArray.join("\n");
 };

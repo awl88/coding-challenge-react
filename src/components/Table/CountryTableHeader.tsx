@@ -1,4 +1,4 @@
-import { TableCell, TableSortLabel } from "@material-ui/core";
+import { TableSortLabel } from "@material-ui/core";
 import { MouseEventHandler } from "react";
 import { FC } from "react";
 import { CountryType, Order } from "../../types/types";
