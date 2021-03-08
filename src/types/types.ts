@@ -48,3 +48,12 @@ type LangugageType = {
 type LanguageListType = LanguageListType[];
 
 export type Order = "asc" | "desc";
+
+export type HeadCellType = {
+  id: keyof CountryType;
+  numeric: boolean;
+  disablePadding: boolean;
+  label: string;
+};
+
+export type HeadCellListType = HeadCellType[];

@@ -1,41 +1,21 @@
-import {
-  Grid,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from "@material-ui/core";
-import { gql, useQuery } from "@apollo/client";
-import { Subregions } from "../Subregions/Subregions";
+import { Grid } from "@material-ui/core";
 import { CountryType, RegionType } from "../../types/types";
 import { CountriesTable } from "../Table/CountriesTable";
 import { Search } from "../Search/Search";
 import { useState } from "react";
 
-const REGION_QUERY = gql`
-  {
-    Region {
-      name
-      subregions {
-        name
-      }
-    }
-  }
-`;
-
 export const Regions = () => {
-  // const { data, loading, error } = useQuery(REGION_QUERY);
   const [search, setSearch] = useState("");
   const [searchField, setSearchField] = useState<keyof CountryType>();
 
   const searchUpdate = (
-    searchText: string
-    // searchFieldUsed: keyof CountryType
+    searchText: string,
+    searchFieldUsed: keyof CountryType
   ) => {
     setSearch(searchText);
-    // setSearchField(searchFieldUsed);
+    setSearchField(searchFieldUsed);
+
+    console.log(searchField);
   };
 
   return (

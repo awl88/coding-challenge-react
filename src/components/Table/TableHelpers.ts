@@ -1,6 +1,11 @@
-import { CountryDtoType, CountryType, Order } from "../../types/types";
+import {
+  CountryDtoType,
+  CountryType,
+  HeadCellListType,
+  Order,
+} from "../../types/types";
 
-export const headCells: any = [
+export const headCells: HeadCellListType = [
   { id: "name", numeric: false, disablePadding: true, label: "Country" },
   { id: "region", numeric: true, disablePadding: false, label: "Region" },
   { id: "subregion", numeric: true, disablePadding: false, label: "Subregion" },
